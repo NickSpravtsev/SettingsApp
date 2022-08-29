@@ -8,20 +8,20 @@
 import UIKit
 
 private let airplaneModeImage: UIImage = UIImage(systemName: "airplane") ?? .remove
-private let wifiImage: UIImage = UIImage(systemName: "wifi.square.fill") ?? .remove
-private let bluetoothImage : UIImage = UIImage(systemName: "play.square.fill") ?? .remove
-private let generalIcon: UIImage = UIImage(systemName: "gear.circle.fill") ?? .remove
+private let wifiImage: UIImage = UIImage(systemName: "wifi") ?? .remove
+private let bluetoothImage : UIImage = UIImage(named: "bluetoothIcon")?.withTintColor(.white) ?? .remove
+private let generalIcon: UIImage = UIImage(systemName: "gear") ?? .remove
 
 enum SettingType {
     case simple
     case withSwitch
-    case withNote
+    case withDetail
     case withNotification
 }
 
 struct SettingItem {
     var icon: UIImage
-    var tintColor: UIColor
+    var backgroundColor: UIColor
     var name: String
     var note = ""
     var type: SettingType
@@ -29,9 +29,9 @@ struct SettingItem {
 
 extension SettingItem {
     static var settingItems: [[SettingItem]] = [
-        [SettingItem(icon: airplaneModeImage, tintColor: .systemOrange, name: "Авиарежим", type: .withSwitch),
-        SettingItem(icon: wifiImage, tintColor: .systemBlue, name: "Wi-Fi", type: .simple)],
-        [SettingItem(icon: bluetoothImage, tintColor: .systemBlue, name: "Bluetooth", note: "Вкл.", type: .withNote)],
-        [SettingItem(icon: generalIcon, tintColor: .systemGray, name: "Основные", type: .withNotification)]
+        [SettingItem(icon: airplaneModeImage, backgroundColor: .systemOrange, name: "Авиарежим", type: .withSwitch),
+        SettingItem(icon: wifiImage, backgroundColor: .systemBlue, name: "Wi-Fi", type: .simple)],
+        [SettingItem(icon: bluetoothImage, backgroundColor: .systemBlue, name: "Bluetooth", note: "Вкл.", type: .withDetail)],
+        [SettingItem(icon: generalIcon, backgroundColor: .systemGray, name: "Основные", type: .withNotification)]
     ]
 }

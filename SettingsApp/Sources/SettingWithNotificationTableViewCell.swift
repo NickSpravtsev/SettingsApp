@@ -16,19 +16,27 @@ class SettingWithNotificationTableViewCell: UITableViewCell {
     var settingItem: SettingItem? {
         didSet {
             iconImageView.image = settingItem?.icon
-            iconImageView.tintColor = settingItem?.tintColor
+            iconView.backgroundColor = settingItem?.backgroundColor
             nameLabel.text = settingItem?.name
         }
     }
 
     // MARK: - Outlets
 
+    private lazy var iconView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 5
+
+        return view
+    }()
+
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.tintColor = .white
 
         return imageView
     }()
-
+    
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
 
@@ -60,21 +68,27 @@ class SettingWithNotificationTableViewCell: UITableViewCell {
     // MARK: Setup
 
     private func setupHierarchy() {
-        contentView.addSubview(iconImageView)
+        contentView.addSubview(iconView)
+        iconView.addSubview(iconImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(notificationImageView)
     }
 
     private func setupLayout() {
-        iconImageView.snp.makeConstraints { make in
+        iconView.snp.makeConstraints { make in
             make.left.equalTo(contentView).offset(10)
             make.centerY.equalTo(contentView)
             make.width.height.equalTo(40)
         }
 
+        iconImageView.snp.makeConstraints { make in
+            make.center.equalTo(iconView)
+            make.width.height.equalTo(20)
+        }
+
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
-            make.left.equalTo(iconImageView.snp.right).offset(10)
+            make.left.equalTo(iconView.snp.right).offset(10)
         }
 
         notificationImageView.snp.makeConstraints { make in

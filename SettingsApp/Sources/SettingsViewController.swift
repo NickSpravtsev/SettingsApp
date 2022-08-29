@@ -77,7 +77,7 @@ extension SettingsViewController: UITableViewDataSource {
             let cell = settingsTableView.dequeueReusableCell(withIdentifier: SettingWithSwitchTableViewCell.identifier, for: indexPath) as? SettingWithSwitchTableViewCell
             cell?.settingItem = item
             return cell ?? UITableViewCell()
-        case .withNote:
+        case .withDetail:
             let cell = settingsTableView.dequeueReusableCell(withIdentifier: SettingWithDetailTableViewCell.identifier, for: indexPath) as? SettingWithDetailTableViewCell
             cell?.settingItem = item
             cell?.accessoryType = .disclosureIndicator
