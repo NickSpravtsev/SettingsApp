@@ -8,23 +8,24 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
+    
     // MARK: - Properties
-
+    
     private var settingItems: [SettingItem]?
-
+    
     // MARK: - Outlets
-
+    
     private lazy var settingsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "simple cell")
+        tableView.register(SettingWithSwitchTableViewCell.self, forCellReuseIdentifier: "cell with switch")
         tableView.dataSource = self
         tableView.delegate = self
         return tableView
     }()
-
+    
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
@@ -34,13 +35,13 @@ class SettingsViewController: UIViewController {
         setupHierarchy()
         setupLayout()
     }
-
+    
     // MARK: - Setup
-
+    
     private func setupHierarchy() {
         view.addSubview(settingsTableView)
     }
-
+    
     private func setupLayout() {
         settingsTableView.snp.makeConstraints { make in
             make.top.bottom.right.left.equalTo(view)
@@ -54,12 +55,23 @@ extension SettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingItems?.count ?? 0
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = settingsTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SettingsTableViewCell
-        cell?.settingItem = settingItems?[indexPath.row]
-        cell?.accessoryType = .disclosureIndicator
-        return cell ?? UITableViewCell()
+        let item = settingItems?[indexPath.row]
+
+        switch item?.type {
+        case .simple:
+            let simpleCell = settingsTableView.dequeueReusableCell(withIdentifier: "simple cell", for: indexPath) as? SettingTableViewCell
+            simpleCell?.settingItem = settingItems?[indexPath.row]
+            simpleCell?.accessoryType = .disclosureIndicator
+            return simpleCell ?? UITableViewCell()
+        case .withSwitch:
+            let cellWithSwitch = settingsTableView.dequeueReusableCell(withIdentifier: "cell with switch", for: indexPath) as? SettingWithSwitchTableViewCell
+            cellWithSwitch?.settingItem = settingItems?[indexPath.row]
+            return cellWithSwitch ?? UITableViewCell()
+        default:
+            return UITableViewCell()
+        }
     }
 }
 
