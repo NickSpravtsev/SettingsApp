@@ -10,6 +10,7 @@ import UIKit
 class SettingWithSwitchTableViewCell: UITableViewCell {
     
     // MARK: - Properties
+    static let identifier = "cell with switch"
     
     var settingItem: SettingItem? {
         didSet {
@@ -55,24 +56,25 @@ class SettingWithSwitchTableViewCell: UITableViewCell {
     // MARK: Setup
     
     private func setupHierarchy() {
-        addSubview(iconImageView)
-        addSubview(nameLabel)
+        contentView.addSubview(iconImageView)
+        contentView.addSubview(nameLabel)
         contentView.addSubview(settingSwitch)
     }
     
     private func setupLayout() {
         iconImageView.snp.makeConstraints { make in
-            make.left.top.bottom.equalTo(contentView).offset(10)
+            make.left.equalTo(contentView).offset(10)
+            make.centerY.equalTo(contentView)
             make.width.height.equalTo(40)
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.top.bottom.equalTo(contentView).offset(10)
+            make.centerY.equalTo(contentView)
             make.left.equalTo(iconImageView.snp.right).offset(10)
         }
 
         settingSwitch.snp.makeConstraints { make in
-            make.top.bottom.equalTo(contentView).offset(15)
+            make.centerY.equalTo(contentView)
             make.right.equalTo(contentView.snp.right).offset(-10)
         }
     }

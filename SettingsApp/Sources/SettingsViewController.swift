@@ -17,8 +17,10 @@ class SettingsViewController: UIViewController {
     
     private lazy var settingsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: "simple cell")
-        tableView.register(SettingWithSwitchTableViewCell.self, forCellReuseIdentifier: "cell with switch")
+        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
+        tableView.register(SettingWithSwitchTableViewCell.self, forCellReuseIdentifier: SettingWithSwitchTableViewCell.identifier)
+        tableView.register(SettingWithDetailTableViewCell.self, forCellReuseIdentifier: SettingWithDetailTableViewCell.identifier)
+        tableView.register(SettingWithNotificationTableViewCell.self, forCellReuseIdentifier: SettingWithNotificationTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
         return tableView
@@ -61,14 +63,24 @@ extension SettingsViewController: UITableViewDataSource {
 
         switch item?.type {
         case .simple:
-            let simpleCell = settingsTableView.dequeueReusableCell(withIdentifier: "simple cell", for: indexPath) as? SettingTableViewCell
-            simpleCell?.settingItem = settingItems?[indexPath.row]
-            simpleCell?.accessoryType = .disclosureIndicator
-            return simpleCell ?? UITableViewCell()
+            let cell = settingsTableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier, for: indexPath) as? SettingTableViewCell
+            cell?.settingItem = settingItems?[indexPath.row]
+            cell?.accessoryType = .disclosureIndicator
+            return cell ?? UITableViewCell()
         case .withSwitch:
-            let cellWithSwitch = settingsTableView.dequeueReusableCell(withIdentifier: "cell with switch", for: indexPath) as? SettingWithSwitchTableViewCell
-            cellWithSwitch?.settingItem = settingItems?[indexPath.row]
-            return cellWithSwitch ?? UITableViewCell()
+            let cell = settingsTableView.dequeueReusableCell(withIdentifier: SettingWithSwitchTableViewCell.identifier, for: indexPath) as? SettingWithSwitchTableViewCell
+            cell?.settingItem = settingItems?[indexPath.row]
+            return cell ?? UITableViewCell()
+        case .withNote:
+            let cell = settingsTableView.dequeueReusableCell(withIdentifier: SettingWithDetailTableViewCell.identifier, for: indexPath) as? SettingWithDetailTableViewCell
+            cell?.settingItem = settingItems?[indexPath.row]
+            cell?.accessoryType = .disclosureIndicator
+            return cell ?? UITableViewCell()
+        case .withNotification:
+            let cell = settingsTableView.dequeueReusableCell(withIdentifier: SettingWithNotificationTableViewCell.identifier, for: indexPath) as? SettingWithNotificationTableViewCell
+            cell?.settingItem = settingItems?[indexPath.row]
+            cell?.accessoryType = .disclosureIndicator
+            return cell ?? UITableViewCell()
         default:
             return UITableViewCell()
         }
