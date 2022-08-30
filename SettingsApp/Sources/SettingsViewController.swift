@@ -21,6 +21,7 @@ class SettingsViewController: UIViewController {
         tableView.register(SettingWithSwitchTableViewCell.self, forCellReuseIdentifier: SettingWithSwitchTableViewCell.identifier)
         tableView.register(SettingWithDetailTableViewCell.self, forCellReuseIdentifier: SettingWithDetailTableViewCell.identifier)
         tableView.register(SettingWithNotificationTableViewCell.self, forCellReuseIdentifier: SettingWithNotificationTableViewCell.identifier)
+        tableView.register(UserProfileSettingTableViewCell.self, forCellReuseIdentifier: UserProfileSettingTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 0)
@@ -88,6 +89,11 @@ extension SettingsViewController: UITableViewDataSource {
             cell?.settingItem = item
             cell?.accessoryType = .disclosureIndicator
             return cell ?? UITableViewCell()
+        case .userProfile:
+            let cell = settingsTableView.dequeueReusableCell(withIdentifier: UserProfileSettingTableViewCell.identifier, for: indexPath) as? UserProfileSettingTableViewCell
+            cell?.settingItem = item
+            cell?.accessoryType = .disclosureIndicator
+            return cell ?? UITableViewCell()
         default:
             return UITableViewCell()
         }
@@ -96,7 +102,13 @@ extension SettingsViewController: UITableViewDataSource {
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 46
+        let item = settingItems?[indexPath.section][indexPath.row]
+        switch item?.type {
+        case .userProfile:
+            return 92
+        default:
+            return 46
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
