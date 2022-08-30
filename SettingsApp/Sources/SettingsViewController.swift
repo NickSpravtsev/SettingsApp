@@ -76,6 +76,7 @@ extension SettingsViewController: UITableViewDataSource {
         case .withSwitch:
             let cell = settingsTableView.dequeueReusableCell(withIdentifier: SettingWithSwitchTableViewCell.identifier, for: indexPath) as? SettingWithSwitchTableViewCell
             cell?.settingItem = item
+            cell?.selectionStyle = .none
             return cell ?? UITableViewCell()
         case .withDetail:
             let cell = settingsTableView.dequeueReusableCell(withIdentifier: SettingWithDetailTableViewCell.identifier, for: indexPath) as? SettingWithDetailTableViewCell
@@ -96,5 +97,19 @@ extension SettingsViewController: UITableViewDataSource {
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 46
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        if cell?.selectionStyle == UITableViewCell.SelectionStyle.none {
+            return
+        }
+
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let viewController = SettingDetailViewController()
+        viewController.settingItem = settingItems?[indexPath.section][indexPath.row]
+        navigationController?.pushViewController(viewController, animated: true)
+        print("Нажата ячейка \"\(settingItems?[indexPath.section][indexPath.row].name ?? "")\"")
     }
 }
