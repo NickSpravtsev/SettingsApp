@@ -44,6 +44,7 @@ class SettingWithSwitchTableViewCell: UITableViewCell {
 
     private lazy var settingSwitch: UISwitch = {
         let settingSwitch = UISwitch()
+        settingSwitch.addTarget(self, action: #selector(settingSwitchSwithed), for: .valueChanged)
 
         return settingSwitch
     }()
@@ -61,7 +62,7 @@ class SettingWithSwitchTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: Setup
+    // MARK: - Setup
     
     private func setupHierarchy() {
         contentView.addSubview(iconView)
@@ -91,5 +92,12 @@ class SettingWithSwitchTableViewCell: UITableViewCell {
             make.centerY.equalTo(contentView)
             make.right.equalTo(contentView.snp.right).offset(-10)
         }
+    }
+
+    // MARK: - Actions
+
+    @objc private func settingSwitchSwithed() {
+        let switchState = settingSwitch.isOn ? "\"Включено\"" : "\"Выключено\""
+        print("Переключен switch в ячейке \"\(nameLabel.text ?? "")\" в состояние \(switchState)")
     }
 }
