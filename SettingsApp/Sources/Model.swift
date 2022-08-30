@@ -30,16 +30,19 @@ private let faceidIcon: UIImage = UIImage(systemName: "faceid") ?? .remove
 private let batteryIcon: UIImage = UIImage(systemName: "battery.100") ?? .remove
 private let confidentialityIcon: UIImage = UIImage(systemName: "hand.raised.fill") ?? .remove
 
+private let userProfileImage: UIImage = UIImage(named: "userPhoto") ?? .remove
+
 enum SettingType {
     case simple
     case withSwitch
     case withDetail
     case withNotification
+    case userProfile
 }
 
 struct SettingItem {
     var icon: UIImage
-    var backgroundColor: UIColor
+    var backgroundColor: UIColor = .clear
     var name: String
     var detail = ""
     var type: SettingType
@@ -47,6 +50,9 @@ struct SettingItem {
 
 extension SettingItem {
     static var settingItems: [[SettingItem]] = [
+        [
+            SettingItem(icon: userProfileImage, name: "Николай", detail: "Apple ID, iCloud, контент и покупки", type: .userProfile)
+        ],
         [
             SettingItem(icon: airplaneModeImage, backgroundColor: .systemOrange, name: "Авиарежим", type: .withSwitch),
             SettingItem(icon: wifiImage, backgroundColor: .systemBlue, name: "Wi-Fi", detail: "Не подключено", type: .withDetail),
