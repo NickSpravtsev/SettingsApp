@@ -56,18 +56,18 @@ class SettingsViewController: UIViewController {
 // MARK: - Extentsions
 
 extension SettingsViewController: UITableViewDataSource {
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return settingItems?.count ?? 0
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingItems?[section].count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = settingItems?[indexPath.section][indexPath.row]
-
+        
         switch item?.type {
         case .simple:
             let cell = settingsTableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier, for: indexPath) as? SettingTableViewCell
@@ -110,15 +110,15 @@ extension SettingsViewController: UITableViewDelegate {
             return 46
         }
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         if cell?.selectionStyle == UITableViewCell.SelectionStyle.none {
             return
         }
-
+        
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         let viewController = SettingDetailViewController()
         viewController.settingItem = settingItems?[indexPath.section][indexPath.row]
         navigationController?.pushViewController(viewController, animated: true)

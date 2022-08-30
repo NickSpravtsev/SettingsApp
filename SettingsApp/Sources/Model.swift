@@ -66,7 +66,7 @@ extension SettingItem {
             SettingItem(icon: soundImage, backgroundColor: .systemRed, name: "Звуки, тактильные сигналы", type: .simple),
             SettingItem(icon: doNotDisturb, backgroundColor: .systemIndigo, name: "Не беспокоить", type: .simple),
             SettingItem(icon: hourGlassImage, backgroundColor: .systemIndigo, name: "Экранное время", type: .simple)
-
+            
         ],
         [
             SettingItem(icon: generalIcon, backgroundColor: .systemGray, name: "Основные", type: .withNotification),

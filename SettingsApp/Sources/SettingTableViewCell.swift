@@ -43,7 +43,6 @@ class SettingTableViewCell: UITableViewCell {
         return label
     }()
     
-    
     // MARK: - Initializers
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
