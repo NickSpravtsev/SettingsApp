@@ -18,6 +18,7 @@ class SettingWithDetailTableViewCell: UITableViewCell {
             iconImageView.image = settingItem?.icon
             iconView.backgroundColor = settingItem?.backgroundColor
             nameLabel.text = settingItem?.name
+            detailLabel.text = settingItem?.detail
         }
     }
 
@@ -43,8 +44,9 @@ class SettingWithDetailTableViewCell: UITableViewCell {
         return label
     }()
 
-    private lazy var noteLabel: UILabel = {
+    private lazy var detailLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .systemGray
 
         return label
     }()
@@ -68,19 +70,19 @@ class SettingWithDetailTableViewCell: UITableViewCell {
         contentView.addSubview(iconView)
         iconView.addSubview(iconImageView)
         contentView.addSubview(nameLabel)
-        contentView.addSubview(noteLabel)
+        contentView.addSubview(detailLabel)
     }
 
     private func setupLayout() {
         iconView.snp.makeConstraints { make in
             make.left.equalTo(contentView).offset(10)
             make.centerY.equalTo(contentView)
-            make.width.height.equalTo(40)
+            make.width.height.equalTo(32)
         }
 
         iconImageView.snp.makeConstraints { make in
             make.center.equalTo(iconView)
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(24)
         }
 
         nameLabel.snp.makeConstraints { make in
@@ -88,7 +90,7 @@ class SettingWithDetailTableViewCell: UITableViewCell {
             make.left.equalTo(iconView.snp.right).offset(10)
         }
 
-        noteLabel.snp.makeConstraints { make in
+        detailLabel.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
             make.right.equalTo(contentView.snp.right).offset(-10)
         }

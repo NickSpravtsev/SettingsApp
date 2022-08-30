@@ -16,7 +16,7 @@ class SettingsViewController: UIViewController {
     // MARK: - Outlets
     
     private lazy var settingsTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
         tableView.register(SettingWithSwitchTableViewCell.self, forCellReuseIdentifier: SettingWithSwitchTableViewCell.identifier)
         tableView.register(SettingWithDetailTableViewCell.self, forCellReuseIdentifier: SettingWithDetailTableViewCell.identifier)
@@ -95,6 +95,6 @@ extension SettingsViewController: UITableViewDataSource {
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 46
     }
 }

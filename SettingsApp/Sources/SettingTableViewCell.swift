@@ -68,12 +68,12 @@ class SettingTableViewCell: UITableViewCell {
         iconView.snp.makeConstraints { make in
             make.left.equalTo(contentView).offset(10)
             make.centerY.equalTo(contentView)
-            make.width.height.equalTo(40)
+            make.width.height.equalTo(32)
         }
 
         iconImageView.snp.makeConstraints { make in
             make.center.equalTo(iconView)
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(24)
         }
 
         nameLabel.snp.makeConstraints { make in
